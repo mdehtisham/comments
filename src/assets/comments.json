@@ -1,0 +1,44 @@
+{
+    "comments": [
+        {
+            "id": "1",
+            "body": "First comment",
+            "username": "Akash",
+            "userId": "1",
+            "parentId": null,
+            "createdAt": "2023-10-22T17:55:27.937Z"
+        },
+        {
+            "id": "2",
+            "body": "Second comment",
+            "username": "Varun",
+            "userId": "2",
+            "parentId": null,
+            "createdAt": "2023-10-22T17:55:27.937Z"
+        },
+        {
+            "id": "3",
+            "body": "Third comment",
+            "username": "Shivam",
+            "userId": "3",
+            "parentId": null,
+            "createdAt": "2023-10-22T17:55:27.937Z"
+        },
+        {
+            "id": "4",
+            "body": "Fourth comment",
+            "username": "Abdul",
+            "userId": "1",
+            "parentId": null,
+            "createdAt": "2023-10-22T17:55:27.937Z"
+        },
+        {
+            "id": "5",
+            "body": "Fifth comment",
+            "username": "Prakash",
+            "userId": "5",
+            "parentId": null,
+            "createdAt": "2023-10-22T17:55:27.937Z"
+        }
+    ]
+}
