@@ -1,0 +1,27 @@
+<div class="container mt-5">
+    <h2>Comment Form</h2>
+    <form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input autocomplete="off" type="text" class="form-control" id="name" formControlName="name">
+        <div *ngIf="commentForm.get('name')?.hasError('nameLength')" class="text-danger pt-1">
+            Name must be at least 3 characters long.
+        </div>
+        <div *ngIf="commentForm.get('name')?.hasError('forbiddenCharacters')" class="text-danger pt-1">
+            Name cannot contain '<' or '>'.
+        </div>
+
+      </div>
+      <div class="mb-3">
+        <label for="comment" class="form-label">Comment</label>
+        <textarea class="form-control" id="comment" rows="4" formControlName="comment"></textarea>
+        <div *ngIf="commentForm.get('comment')?.hasError('commentLength')" class="text-danger pt-1">
+            Comment must be at least 5 characters long.
+        </div>
+        <div *ngIf="commentForm.get('comment')?.hasError('forbiddenCharacters')" class="text-danger pt-1">
+            Comment cannot contain '<' or '>'.
+          </div>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="!commentForm.valid">Submit</button>
+    </form>
+  </div>
