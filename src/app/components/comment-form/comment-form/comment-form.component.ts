@@ -87,7 +87,6 @@ export class CommentFormComponent implements OnInit {
         comment: this.commentForm.value.comment,
         id: this.editingData?.id ? this.editingData?.id :  `${Date.now()}`,
       });
-      console.log(this.commentForm.value);
       this.commentForm.reset();
       if(this.editingData?.id){
         this.onCancelClick.emit(true)
