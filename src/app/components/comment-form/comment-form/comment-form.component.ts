@@ -80,7 +80,6 @@ export class CommentFormComponent implements OnInit {
   }
 
   onSubmit() {
-    // Handle the form submit logic
     if (this.commentForm.valid) {
       this.handleSubmit.emit({
         name: this.commentForm.value.name,
