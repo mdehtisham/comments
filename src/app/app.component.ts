@@ -25,7 +25,7 @@ export class AppComponent implements OnInit{
     }else{
       this.commentService.getComments().subscribe(comments => {
         this.comments = comments
-        localStorage.setItem('comments', JSON.stringify(this.comments))
+        this.setToLocalStorage()
       })
     }
   }
@@ -34,14 +34,13 @@ export class AppComponent implements OnInit{
     const {formVal, parentId} = event;
     const formValData : CommentInterface | null = this.prepareFormVal(formVal, parentId)
     this.comments.push(formValData)
-    localStorage.setItem('comments', JSON.stringify(this.comments))
-    console.log('form value', formValData)
+    this.setToLocalStorage()
   }
 
-  prepareFormVal(formVal:FormInputInterface,  parentId: null|string|symbol|undefined = null){
-    const uniqueId = Symbol();
+  prepareFormVal(formVal:FormInputInterface,  parentId: null|string|undefined = null){
+    const uniqueId = `${Date.now()}`;
     return {
-      id: formVal.id,
+      id: formVal.id || uniqueId,
       body: formVal.comment,
       username: formVal.name,
       userId: formVal.name.toLocaleLowerCase() || uniqueId,
@@ -52,9 +51,40 @@ export class AppComponent implements OnInit{
 
   addComment(value: FormInputInterface | null){
     if(value){
-      const tempVal = this.prepareFormVal({name: value.name, comment: value.comment}, value.parentId)
+      const tempVal = this.prepareFormVal({name: value.name, comment: value.comment, id: value.id}, value.parentId)
       this.comments.push(tempVal)
-      localStorage.setItem('comments', JSON.stringify(this.comments))
+      this.setToLocalStorage()
     }
   }
+  handleUpdateComment(value: FormInputInterface | null){
+    if(value){
+      const tempVal = this.prepareFormVal({name: value.name, comment: value.comment, id: value.id}, value.parentId)
+      this.comments = this.comments.map(comment => {
+        if(comment.id === value.id){
+          comment = {...comment, ...tempVal}
+        }
+        return comment;
+      })
+      this.setToLocalStorage()
+    }
+  }
+  handleDeleteComment(commentId: string){
+    this.comments = this.comments.filter(comment => comment.id != commentId)
+    this.setToLocalStorage()
+  }
+
+  handleClearAll(){
+    this.comments = []
+    this.setToLocalStorage()
+  }
+
+  handleSetToDefault(){
+    this.handleFetchingComments()
+  }
+
+  setToLocalStorage(){
+    localStorage.setItem('comments', JSON.stringify(this.comments))
+  }
+
+
 }

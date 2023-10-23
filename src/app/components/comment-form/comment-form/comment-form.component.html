@@ -1,5 +1,5 @@
-<div class="container mt-5">
-    <h2>Comment Form</h2>
+<div class="container mt-5" [class.card]="!isMainForm" [class.reply-edit-form]="!isMainForm">
+    <h2 *ngIf="isMainForm">Comment Form</h2>
     <form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
       <div class="mb-3">
         <label for="name" class="form-label">Name</label>
@@ -22,7 +22,7 @@
             Comment cannot contain '<' or '>'.
           </div>
       </div>
-      <button type="submit" class="btn btn-primary" [disabled]="!commentForm.valid">{{submitLabel}}</button>
-      <button type="button" class="btn btn-primary" *ngIf="hasCancelButton">Cancel</button>
+      <button type="submit" class="btn {{isMainForm ? 'btn-primary' : 'btn-outline-primary me-1 btn-sm'}}" [disabled]="!commentForm.valid">{{submitLabel}}</button>
+      <button (click)="handleCancel()" type="button" class="btn {{isMainForm ? 'btn-primary' : 'btn-outline-primary btn-sm'}}" *ngIf="hasCancelButton">Cancel</button>
     </form>
   </div>

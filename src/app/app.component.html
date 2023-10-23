@@ -1,12 +1,21 @@
-<app-navbar></app-navbar>
+<app-navbar (handleClearAll)="handleClearAll()" (handleSetToDefault)="handleSetToDefault()"></app-navbar>
 
 <div class="container p-3">
   <div class="row">
-    <div class="col">
-      <app-comment-form (handleSubmit)="handleSubmit({formVal:$event, parentId: null})" submitLabel="Submit"></app-comment-form>
+    <div class="col-sm-12 col-md-4">
+      <app-comment-form [isMainForm]="true" (handleSubmit)="handleSubmit({formVal:$event, parentId: null})" submitLabel="Submit"></app-comment-form>
     </div>
-    <div class="col">
-      <app-comments (addComment)="addComment($event)" [comments]="comments" currentUserId="1"></app-comments>
+    <div *ngIf="comments.length" class="col-sm-12 col-md-8">
+      <app-comments 
+      (handleDelete)="handleDeleteComment($event)" 
+      (addComment)="addComment($event)" 
+      [comments]="comments" 
+      currentUserId="1"
+      (updateCommentData)="handleUpdateComment($event)"></app-comments>
+      <div class=""></div>
+    </div>
+    <div *ngIf="!comments.length" class="col-sm-12 col-md-8 d-flex align-items-center justify-content-center">
+      <h4>No Comments Found</h4>
     </div>
   </div>
 </div>

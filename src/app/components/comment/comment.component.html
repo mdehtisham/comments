@@ -7,20 +7,29 @@
         <label>{{comment?.createdAt |  date:'medium'}}</label>
       </div>
     <div class="card-body">
-        
         <p class="card-text">{{ comment.body }}</p>
-        <div>COMMENT FORM EDITING</div>
+        <!-- Editing Section Start-->
         <app-comment-form *ngIf="isEditing()" submitLabel="Update"
+        (onCancelClick)="handleCancel()"
         [hasCancelButton]="true"
-        [initialText]="comment.body"
-        (handleSubmit)="updateComment($event)"></app-comment-form>
-        <div class="comment-actions">
-            <button (click)="setActiveComment.emit({id: comment.id, type: activeCommentType.replying})" class="btn btn-outline-primary btn-sm comment-action" *ngIf="canReply">Reply</button>
+        [editingData]="comment"
+        (handleSubmit)="updateComment($event)"
+        ></app-comment-form>
+        <!-- Editing Section End-->
+        <div *ngIf="!isEditing()" class="comment-actions">
+            <button (click)="setActiveComment.emit({id: comment.id, type: activeCommentType.replying, parentId: comment.parentId || null})" class="btn btn-outline-primary btn-sm comment-action" *ngIf="canReply">Reply</button>
             <button (click)="setActiveComment.emit({id: comment.id, type: activeCommentType.editing})" class="btn btn-outline-primary btn-sm comment-action" *ngIf="canEdit">Edit</button>
-            <button class="btn btn-outline-primary btn-sm comment-action" *ngIf="canDelete">Delete</button>
+            <button (click)="onDelete()" class="btn btn-outline-primary btn-sm comment-action" *ngIf="canDelete">Delete</button>
         </div>
-        <!-- Reply Section -->
-        <app-comment-form [hasCancelButton]="true" *ngIf="isReplying()"  submitLabel="Reply" (handleSubmit)="handleSubmit($event)"> </app-comment-form>
+        <!-- Reply Section Start -->
+        <app-comment-form 
+        [hasCancelButton]="true" 
+        *ngIf="isReplying()"  
+        submitLabel="Reply" 
+        (handleSubmit)="handleSubmit($event)"
+        (onCancelClick)="handleCancel()"> 
+        </app-comment-form>
+
         <div class="replies" *ngIf="replies.length">
             <app-comment *ngFor="let reply of replies" 
             [comment]="reply"
@@ -29,7 +38,7 @@
             (setActiveComment)="setActiveComment.emit($event)" 
             [replies]="[]" 
             [currentUserId]="currentUserId"
-            [parentId]="reply.id"
+            [parentId]="reply.parentId"
             ></app-comment>
         </div>
         <!-- End Reply Section -->

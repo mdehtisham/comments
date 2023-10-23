@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -6,5 +6,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
+  @Output() handleClearAll = new EventEmitter<boolean>()
+  @Output() handleSetToDefault = new EventEmitter<boolean>()
 
+
+  clearAll(){
+    this.handleClearAll.emit(true)
+  }
+  setToDefault(){
+    localStorage.removeItem('comments')
+    this.handleSetToDefault.emit(true)
+  }
 }

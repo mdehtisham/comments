@@ -12,14 +12,16 @@ export class CommentComponent implements OnInit{
   canEdit = false;
   canDelete = false;
   @Input() comment!: CommentInterface;
-  @Input() currentUserId !: string | symbol;
-  @Input() parentId !: string | symbol | null | undefined;
+  @Input() currentUserId !: string ;
+  @Input() parentId !: string | null | undefined;
   @Input() replies: CommentInterface[] = []
   @Input() activeComment!: ActiveCommentInterface | null; 
   activeCommentType = ActiveCommentTypeEnum;
   @Output() setActiveComment = new EventEmitter<ActiveCommentInterface | null>()
   @Output() addComment = new EventEmitter<FormInputInterface | null>()
-  replyId: string | symbol | null | undefined = null;
+  @Output() updateCommentData = new EventEmitter<FormInputInterface | null>()
+  @Output() handleDelete = new EventEmitter<string>()
+  replyId: string | null | undefined = null;
 
   ngOnInit(): void {
     this.canReply = Boolean(this.currentUserId);
@@ -45,7 +47,12 @@ export class CommentComponent implements OnInit{
     this.addComment.emit({...event, parentId: this.replyId})
   }
   updateComment(event: FormInputInterface){
-    this.addComment.emit({...event, id: event.id})
+    this.updateCommentData.emit({...event, id: event.id})
   }
-
+  handleCancel(){
+    this.setActiveComment.emit(null)
+  }
+  onDelete(){
+    this.handleDelete.emit(this.comment.id as string)
+  }
 }
