@@ -9,13 +9,13 @@ import { ActiveCommentInterface, CommentInterface, FormInputInterface } from '..
 export class CommentsComponent {
   @Input() comments!: CommentInterface[];
   newComment: string = '';
-  @Input() currentUserId!: string;
+  @Input() currentUserId!: string|null|undefined|symbol;
   activeComment: ActiveCommentInterface | null = null;
   @Output() addComment = new EventEmitter<FormInputInterface | null>()
 
 
 
-  getReplies(commentId: string){
+  getReplies(commentId: string|null|undefined|symbol){
     return this.comments.filter(comment => comment.parentId === commentId)
     .sort((a,b) => new Date(a.createdAt).getMilliseconds() - new Date(b.createdAt).getMilliseconds())
   }

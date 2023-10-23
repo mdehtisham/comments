@@ -39,30 +39,7 @@
             "userId": "5",
             "parentId": null,
             "createdAt": "2023-10-22T17:55:27.937Z"
-        },
-        {
-            "id": "5",
-            "body": "Fifth comment",
-            "username": "Prakash",
-            "userId": "5",
-            "parentId": null,
-            "createdAt": "2023-10-22T17:55:27.937Z"
-        },
-        {
-            "id": "5",
-            "body": "Fifth comment",
-            "username": "Prakash",
-            "userId": "5",
-            "parentId": null,
-            "createdAt": "2023-10-22T17:55:27.937Z"
-        },
-        {
-            "id": "5",
-            "body": "Fifth comment",
-            "username": "Prakash",
-            "userId": "5",
-            "parentId": null,
-            "createdAt": "2023-10-22T17:55:27.937Z"
         }
+        
     ]
 }

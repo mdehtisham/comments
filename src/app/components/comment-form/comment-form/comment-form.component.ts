@@ -52,7 +52,7 @@ export class CommentFormComponent {
   onSubmit() {
     // Handle the form submit logic
     if (this.commentForm.valid) {
-      this.handleSubmit.emit({name: this.commentForm.value.name, comment: this.commentForm.value.comment})
+      this.handleSubmit.emit({name: this.commentForm.value.name, comment: this.commentForm.value.comment, id: Symbol()})
       console.log(this.commentForm.value);
       this.commentForm.reset();
     }

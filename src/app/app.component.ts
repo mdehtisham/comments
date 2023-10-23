@@ -38,15 +38,15 @@ export class AppComponent implements OnInit{
     console.log('form value', formValData)
   }
 
-  prepareFormVal(formVal:FormInputInterface,  parentId: null|string = null){
+  prepareFormVal(formVal:FormInputInterface,  parentId: null|string|symbol|undefined = null){
     const uniqueId = Symbol();
     return {
-      id: '1',
-    body: formVal.comment,
-    username: formVal.name,
-    userId: formVal.name.toLocaleLowerCase() || uniqueId,
-    parentId: parentId ? parentId : null,
-    createdAt: new Date().toISOString()
+      id: formVal.id,
+      body: formVal.comment,
+      username: formVal.name,
+      userId: formVal.name.toLocaleLowerCase() || uniqueId,
+      parentId: parentId ? parentId : null,
+      createdAt: new Date().toISOString()
     }
   }
 

@@ -1,6 +1,13 @@
 <div class="comments-container container mt-4">
     <div *ngFor="let comment of comments" class="mb-3">
-      <app-comment (addComment)="addComment.emit($event)"  [activeComment]="activeComment" (setActiveComment)="setActiveComment($event)" [replies]="getReplies(comment.id)" [currentUserId]="comment!.userId" [comment]="comment"></app-comment>
+      <app-comment 
+      (addComment)="addComment.emit($event);activeComment=null"  
+      [activeComment]="activeComment ?? null" 
+      (setActiveComment)="setActiveComment($event)" 
+      [replies]="getReplies(comment.id)" 
+      [currentUserId]="comment!.userId" 
+      [comment]="comment">
+    </app-comment>
       <!-- <div class="card-footer text-muted">
         <button class="btn btn-link btn-sm">
           {{ comment.isEditing ? 'Cancel' : 'Edit' }}
