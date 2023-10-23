@@ -47,6 +47,7 @@ export class CommentComponent implements OnInit{
     this.addComment.emit({...event, parentId: this.replyId})
   }
   updateComment(event: FormInputInterface){
+    this.handleCancel()
     this.updateCommentData.emit({...event, id: event.id})
   }
   handleCancel(){

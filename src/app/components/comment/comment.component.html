@@ -19,7 +19,7 @@
         <div *ngIf="!isEditing()" class="comment-actions">
             <button (click)="setActiveComment.emit({id: comment.id, type: activeCommentType.replying, parentId: comment.parentId || null})" class="btn btn-outline-primary btn-sm comment-action" *ngIf="canReply">Reply</button>
             <button (click)="setActiveComment.emit({id: comment.id, type: activeCommentType.editing})" class="btn btn-outline-primary btn-sm comment-action" *ngIf="canEdit">Edit</button>
-            <button (click)="onDelete()" class="btn btn-outline-primary btn-sm comment-action" *ngIf="canDelete">Delete</button>
+            <button (click)="onDelete()" class="btn btn-outline-primary btn-sm comment-action" *ngIf="canDelete && !replies.length">Delete</button>
         </div>
         <!-- Reply Section Start -->
         <app-comment-form 

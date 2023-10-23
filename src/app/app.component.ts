@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommentsService } from './services/comments.service';
 import { CommentInterface, FormInputInterface } from '../app/components/types/comments.interface';
 
@@ -10,7 +10,7 @@ import { CommentInterface, FormInputInterface } from '../app/components/types/co
 export class AppComponent implements OnInit{
   title = 'comments';
   comments: CommentInterface[] = []
-  constructor(private commentService : CommentsService){}
+  constructor(private commentService : CommentsService, private cdr: ChangeDetectorRef){}
 
 
   ngOnInit(): void {
@@ -83,6 +83,7 @@ export class AppComponent implements OnInit{
   }
 
   setToLocalStorage(){
+    this.cdr.detectChanges()
     localStorage.setItem('comments', JSON.stringify(this.comments))
   }
 
