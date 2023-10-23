@@ -9,7 +9,17 @@
     <div class="card-body">
         
         <p class="card-text">{{ comment.body }}</p>
+        <div>COMMENT FORM EDITING</div>
+        <div class="comment-actions">
+            <button (click)="setActiveComment.emit({id: comment.id, type: activeCommentType.replying})" class="btn btn-outline-primary btn-sm comment-action" *ngIf="canReply">Reply</button>
+            <button (click)="setActiveComment.emit({id: comment.id, type: activeCommentType.editing})" class="btn btn-outline-primary btn-sm comment-action" *ngIf="canEdit">Edit</button>
+            <button class="btn btn-outline-primary btn-sm comment-action" *ngIf="canDelete">Delete</button>
+        </div>
+        <div>COMMENT FORM REPLYING</div>
+        <app-comment-form *ngIf="isReplying()" submitLabe="Reply" (handleSubmit)="handleSubmit($event)"> </app-comment-form>
+        <div>REPLIES</div>
         <!-- <textarea class="form-control" *ngIf="comment.isEditing" [(ngModel)]="comment.body"></textarea> -->
+        
     </div>
 
 </div>

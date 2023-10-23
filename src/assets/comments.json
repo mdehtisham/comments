@@ -13,7 +13,7 @@
             "body": "Second comment",
             "username": "Varun",
             "userId": "2",
-            "parentId": "1",
+            "parentId": null,
             "createdAt": "2023-10-22T17:55:27.937Z"
         },
         {
@@ -21,7 +21,7 @@
             "body": "Third comment",
             "username": "Shivam",
             "userId": "3",
-            "parentId": "2",
+            "parentId": null,
             "createdAt": "2023-10-22T17:55:27.937Z"
         },
         {

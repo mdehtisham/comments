@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { CommentInterface } from 'src/app/types/comments.interface';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ActiveCommentInterface, CommentInterface, FormInputInterface } from '../types/comments.interface';
 
 @Component({
   selector: 'app-comments',
@@ -10,5 +10,18 @@ export class CommentsComponent {
   @Input() comments!: CommentInterface[];
   newComment: string = '';
   @Input() currentUserId!: string;
+  activeComment: ActiveCommentInterface | null = null;
+  @Output() addComment = new EventEmitter<FormInputInterface | null>()
+
+
+
+  getReplies(commentId: string){
+    return this.comments.filter(comment => comment.parentId === commentId)
+    .sort((a,b) => new Date(a.createdAt).getMilliseconds() - new Date(b.createdAt).getMilliseconds())
+  }
+
+  setActiveComment(activeComment: ActiveCommentInterface | null): void{
+    this.activeComment = activeComment;
+  }
 
 }

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { FormInputInterface } from 'src/app/types/comments.interface';
+import { FormInputInterface } from '../../types/comments.interface';
 
 @Component({
   selector: 'app-comment-form',
