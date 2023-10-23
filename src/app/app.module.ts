@@ -6,6 +6,8 @@ import { CommentFormComponent } from './components/comment-form/comment-form/com
 import { CommentComponent } from './components/comment/comment.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { CommentsComponent } from './components/comments/comments.component';
+import { HttpClientModule } from '@angular/common/http';
+import { CommentsService } from './services/comments.service';
 
 @NgModule({
   declarations: [
@@ -18,9 +20,10 @@ import { CommentsComponent } from './components/comments/comments.component';
   imports: [
     BrowserModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [CommentsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

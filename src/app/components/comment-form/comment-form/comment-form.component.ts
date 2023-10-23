@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { FormInputInterface } from 'src/app/types/comments.interface';
 
 @Component({
   selector: 'app-comment-form',
@@ -7,6 +8,10 @@ import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators }
   styleUrls: ['./comment-form.component.scss']
 })
 export class CommentFormComponent {
+  @Input() submitLabel!: string;
+  @Input() hasCancelButton: boolean = false;
+  @Input() initialText: string = '';
+  @Output() handleSubmit = new EventEmitter<FormInputInterface>()
   commentForm: FormGroup;
 
   constructor(private fb: FormBuilder) {
@@ -45,8 +50,9 @@ export class CommentFormComponent {
   }
 
   onSubmit() {
+    // Handle the form submit logic
     if (this.commentForm.valid) {
-      // Handle the form submit logic
+      this.handleSubmit.emit({name: this.commentForm.value.name, comment: this.commentForm.value.comment})
       console.log(this.commentForm.value);
       this.commentForm.reset();
     }

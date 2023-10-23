@@ -1,1 +1,15 @@
-<p>comment works!</p>
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="card-title">
+          <i class="bi bi-person-circle"></i>
+          {{comment.username}}
+        </h5>
+        <label>{{comment?.createdAt |  date:'medium'}}</label>
+      </div>
+    <div class="card-body">
+        
+        <p class="card-text">{{ comment.body }}</p>
+        <!-- <textarea class="form-control" *ngIf="comment.isEditing" [(ngModel)]="comment.body"></textarea> -->
+    </div>
+
+</div>
